@@ -19,30 +19,52 @@ class AppointmentService {
     return { ...appointment };
   }
 
-  async create(appointmentData) {
+async create(appointmentData) {
     await this.delay(500);
     const newAppointment = {
       ...appointmentData,
       Id: Math.max(...this.appointments.map(a => a.Id)) + 1,
       patientId: parseInt(appointmentData.patientId),
-      doctorId: parseInt(appointmentData.doctorId)
+      doctorId: parseInt(appointmentData.doctorId),
+      reminderSettings: appointmentData.reminderSettings || {
+        patientReminders: [],
+        doctorReminders: [],
+        notificationMethods: ['email']
+      }
     };
     this.appointments.push(newAppointment);
+    
+    // Schedule reminders if configured
+    if (newAppointment.reminderSettings.patientReminders.length > 0 || 
+        newAppointment.reminderSettings.doctorReminders.length > 0) {
+      const { notificationService } = await import('./notificationService');
+      await notificationService.scheduleReminders(newAppointment);
+    }
+    
     return { ...newAppointment };
   }
-
-  async update(id, appointmentData) {
+async update(id, appointmentData) {
     await this.delay(400);
     const index = this.appointments.findIndex(a => a.Id === parseInt(id));
     if (index === -1) {
       throw new Error("Appointment not found");
     }
+    
+    const oldAppointment = { ...this.appointments[index] };
     this.appointments[index] = { 
       ...this.appointments[index], 
       ...appointmentData,
       patientId: parseInt(appointmentData.patientId),
       doctorId: parseInt(appointmentData.doctorId)
     };
+    
+    // Reschedule reminders if settings changed
+    if (appointmentData.reminderSettings) {
+      const { notificationService } = await import('./notificationService');
+      await notificationService.cancelReminders(oldAppointment);
+      await notificationService.scheduleReminders(this.appointments[index]);
+    }
+    
     return { ...this.appointments[index] };
   }
 

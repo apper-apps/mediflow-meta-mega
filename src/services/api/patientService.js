@@ -49,10 +49,32 @@ class PatientService {
     this.patients.splice(index, 1);
     return true;
 }
-async getTreatmentHistory(patientId) {
+
+  async getTreatmentHistory(patientId) {
     await this.delay(400);
     return await treatmentService.getByPatientId(patientId);
   }
+
+  async updateNotificationPreferences(patientId, preferences) {
+    await this.delay(300);
+    const index = this.patients.findIndex(p => p.Id === parseInt(patientId));
+    if (index === -1) {
+      throw new Error("Patient not found");
+    }
+    
+    this.patients[index] = {
+      ...this.patients[index],
+      notificationPreferences: {
+        email: preferences.email || this.patients[index].email,
+        phone: preferences.phone || this.patients[index].phone,
+        methods: preferences.methods || ['email'],
+        reminderTimes: preferences.reminderTimes || ['24h', '2h']
+      }
+    };
+    
+    return { ...this.patients[index] };
+  }
+
   delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }

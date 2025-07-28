@@ -189,7 +189,124 @@ const AppointmentForm = ({ appointment, onSubmit, onCancel }) => {
           value={formData.notes}
           onChange={(e) => handleChange("notes", e.target.value)}
           placeholder="Any additional notes or instructions (optional)"
-        />
+/>
+
+        {/* Reminder Settings */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-medium text-gray-900">Reminder Settings</h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Patient Reminders
+              </label>
+              <div className="space-y-2">
+                {['24h', '12h', '6h', '2h', '1h'].map(time => (
+                  <label key={time} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formData.reminderSettings?.patientReminders?.includes(time) || false}
+                      onChange={(e) => {
+                        const current = formData.reminderSettings?.patientReminders || [];
+                        const updated = e.target.checked 
+                          ? [...current, time]
+                          : current.filter(t => t !== time);
+                        handleChange('reminderSettings', {
+                          ...formData.reminderSettings,
+                          patientReminders: updated
+                        });
+                      }}
+                      className="mr-2"
+                    />
+                    <span className="text-sm text-gray-700">
+                      {time === '24h' ? '24 hours before' :
+                       time === '12h' ? '12 hours before' :
+                       time === '6h' ? '6 hours before' :
+                       time === '2h' ? '2 hours before' : '1 hour before'}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Doctor Reminders
+              </label>
+              <div className="space-y-2">
+                {['24h', '12h', '6h', '2h', '1h'].map(time => (
+                  <label key={time} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={formData.reminderSettings?.doctorReminders?.includes(time) || false}
+                      onChange={(e) => {
+                        const current = formData.reminderSettings?.doctorReminders || [];
+                        const updated = e.target.checked 
+                          ? [...current, time]
+                          : current.filter(t => t !== time);
+                        handleChange('reminderSettings', {
+                          ...formData.reminderSettings,
+                          doctorReminders: updated
+                        });
+                      }}
+                      className="mr-2"
+                    />
+                    <span className="text-sm text-gray-700">
+                      {time === '24h' ? '24 hours before' :
+                       time === '12h' ? '12 hours before' :
+                       time === '6h' ? '6 hours before' :
+                       time === '2h' ? '2 hours before' : '1 hour before'}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Notification Methods
+            </label>
+            <div className="flex space-x-4">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={formData.reminderSettings?.notificationMethods?.includes('email') || true}
+                  onChange={(e) => {
+                    const current = formData.reminderSettings?.notificationMethods || ['email'];
+                    const updated = e.target.checked 
+                      ? [...current.filter(m => m !== 'email'), 'email']
+                      : current.filter(m => m !== 'email');
+                    handleChange('reminderSettings', {
+                      ...formData.reminderSettings,
+                      notificationMethods: updated
+                    });
+                  }}
+                  className="mr-2"
+                />
+                <span className="text-sm text-gray-700">Email</span>
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={formData.reminderSettings?.notificationMethods?.includes('sms') || false}
+                  onChange={(e) => {
+                    const current = formData.reminderSettings?.notificationMethods || [];
+                    const updated = e.target.checked 
+                      ? [...current.filter(m => m !== 'sms'), 'sms']
+                      : current.filter(m => m !== 'sms');
+                    handleChange('reminderSettings', {
+                      ...formData.reminderSettings,
+                      notificationMethods: updated
+                    });
+                  }}
+                  className="mr-2"
+                />
+                <span className="text-sm text-gray-700">SMS</span>
+              </label>
+            </div>
+          </div>
+        </div>
         
         <div className="flex justify-end space-x-4">
           <Button

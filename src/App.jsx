@@ -1,24 +1,25 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import ReminderSettings from "@/components/pages/ReminderSettings";
+import "@/index.css";
 import Layout from "@/components/Layout";
-import Dashboard from "@/components/pages/Dashboard";
-import Patients from "@/components/pages/Patients";
-import Appointments from "@/components/pages/Appointments";
 import Doctors from "@/components/pages/Doctors";
 import Billing from "@/components/pages/Billing";
+import Dashboard from "@/components/pages/Dashboard";
+import Appointments from "@/components/pages/Appointments";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Layout />}>
+<Route path="/" element={<Layout />}>
             <Route index element={<Dashboard />} />
-            <Route path="patients" element={<Patients />} />
+            <Route path="billing" element={<Billing />} />
+            <Route path="reminders" element={<ReminderSettings />} />
             <Route path="appointments" element={<Appointments />} />
             <Route path="doctors" element={<Doctors />} />
-            <Route path="billing" element={<Billing />} />
           </Route>
         </Routes>
         
