@@ -1,82 +1,242 @@
-import patientsData from "@/services/mockData/patients.json";
-import { treatmentService } from "./treatmentService";
 class PatientService {
   constructor() {
-    this.patients = [...patientsData];
+    this.apperClient = null;
+    this.initializeClient();
+  }
+
+  initializeClient() {
+    const { ApperClient } = window.ApperSDK;
+    this.apperClient = new ApperClient({
+      apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+      apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+    });
   }
 
   async getAll() {
-    await this.delay(300);
-    return [...this.patients];
+    try {
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "dateOfBirth" } },
+          { field: { Name: "contact" } },
+          { field: { Name: "email" } },
+          { field: { Name: "emergencyContact" } },
+          { field: { Name: "bloodGroup" } },
+          { field: { Name: "allergies" } },
+          { field: { Name: "registrationDate" } },
+          { field: { Name: "Tags" } }
+        ],
+        orderBy: [
+          { fieldName: "registrationDate", sorttype: "DESC" }
+        ]
+      };
+
+      const response = await this.apperClient.fetchRecords('patient', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      return response.data || [];
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error fetching patients:", error?.response?.data?.message);
+      } else {
+        console.error("Error fetching patients:", error.message);
+      }
+      throw error;
+    }
   }
 
   async getById(id) {
-    await this.delay(200);
-    const patient = this.patients.find(p => p.Id === parseInt(id));
-    if (!patient) {
-      throw new Error("Patient not found");
+    try {
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "dateOfBirth" } },
+          { field: { Name: "contact" } },
+          { field: { Name: "email" } },
+          { field: { Name: "emergencyContact" } },
+          { field: { Name: "bloodGroup" } },
+          { field: { Name: "allergies" } },
+          { field: { Name: "registrationDate" } },
+          { field: { Name: "Tags" } }
+        ]
+      };
+
+      const response = await this.apperClient.getRecordById('patient', parseInt(id), params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      return response.data;
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error(`Error fetching patient with ID ${id}:`, error?.response?.data?.message);
+      } else {
+        console.error(`Error fetching patient with ID ${id}:`, error.message);
+      }
+      throw error;
     }
-    return { ...patient };
   }
 
   async create(patientData) {
-    await this.delay(500);
-    const newPatient = {
-      ...patientData,
-      Id: Math.max(...this.patients.map(p => p.Id)) + 1,
-      registrationDate: new Date().toISOString()
-    };
-    this.patients.push(newPatient);
-    return { ...newPatient };
+    try {
+      // Only include Updateable fields
+      const params = {
+        records: [{
+          Name: patientData.Name || patientData.name,
+          dateOfBirth: patientData.dateOfBirth,
+          contact: patientData.contact,
+          email: patientData.email,
+          emergencyContact: patientData.emergencyContact,
+          bloodGroup: patientData.bloodGroup,
+          allergies: patientData.allergies,
+          registrationDate: new Date().toISOString(),
+          Tags: patientData.Tags || ''
+        }]
+      };
+
+      const response = await this.apperClient.createRecord('patient', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      if (response.results) {
+        const successfulRecords = response.results.filter(result => result.success);
+        const failedRecords = response.results.filter(result => !result.success);
+        
+        if (failedRecords.length > 0) {
+          console.error(`Failed to create patients ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+          
+          failedRecords.forEach(record => {
+            record.errors?.forEach(error => {
+              throw new Error(`${error.fieldLabel}: ${error.message}`);
+            });
+            if (record.message) throw new Error(record.message);
+          });
+        }
+        
+        return successfulRecords[0]?.data;
+      }
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error creating patient:", error?.response?.data?.message);
+      } else {
+        console.error("Error creating patient:", error.message);
+      }
+      throw error;
+    }
   }
 
   async update(id, patientData) {
-    await this.delay(400);
-    const index = this.patients.findIndex(p => p.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error("Patient not found");
+    try {
+      // Only include Updateable fields
+      const params = {
+        records: [{
+          Id: parseInt(id),
+          Name: patientData.Name || patientData.name,
+          dateOfBirth: patientData.dateOfBirth,
+          contact: patientData.contact,
+          email: patientData.email,
+          emergencyContact: patientData.emergencyContact,
+          bloodGroup: patientData.bloodGroup,
+          allergies: patientData.allergies,
+          Tags: patientData.Tags || ''
+        }]
+      };
+
+      const response = await this.apperClient.updateRecord('patient', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      if (response.results) {
+        const successfulUpdates = response.results.filter(result => result.success);
+        const failedUpdates = response.results.filter(result => !result.success);
+        
+        if (failedUpdates.length > 0) {
+          console.error(`Failed to update patients ${failedUpdates.length} records:${JSON.stringify(failedUpdates)}`);
+          
+          failedUpdates.forEach(record => {
+            record.errors?.forEach(error => {
+              throw new Error(`${error.fieldLabel}: ${error.message}`);
+            });
+            if (record.message) throw new Error(record.message);
+          });
+        }
+        
+        return successfulUpdates[0]?.data;
+      }
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error updating patient:", error?.response?.data?.message);
+      } else {
+        console.error("Error updating patient:", error.message);
+      }
+      throw error;
     }
-    this.patients[index] = { ...this.patients[index], ...patientData };
-    return { ...this.patients[index] };
   }
 
   async delete(id) {
-    await this.delay(300);
-    const index = this.patients.findIndex(p => p.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error("Patient not found");
+    try {
+      const params = {
+        RecordIds: [parseInt(id)]
+      };
+
+      const response = await this.apperClient.deleteRecord('patient', params);
+      
+      if (!response.success) {
+        console.error(response.message);
+        throw new Error(response.message);
+      }
+
+      if (response.results) {
+        const successfulDeletions = response.results.filter(result => result.success);
+        const failedDeletions = response.results.filter(result => !result.success);
+        
+        if (failedDeletions.length > 0) {
+          console.error(`Failed to delete patients ${failedDeletions.length} records:${JSON.stringify(failedDeletions)}`);
+          
+          failedDeletions.forEach(record => {
+            if (record.message) throw new Error(record.message);
+          });
+        }
+        
+        return successfulDeletions.length > 0;
+      }
+      
+      return false;
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error deleting patient:", error?.response?.data?.message);
+      } else {
+        console.error("Error deleting patient:", error.message);
+      }
+      throw error;
     }
-    this.patients.splice(index, 1);
-    return true;
-}
+  }
 
   async getTreatmentHistory(patientId) {
-    await this.delay(400);
+    // This will use the treatment service to get patient treatments
+    const { treatmentService } = await import('./treatmentService');
     return await treatmentService.getByPatientId(patientId);
   }
 
   async updateNotificationPreferences(patientId, preferences) {
-    await this.delay(300);
-    const index = this.patients.findIndex(p => p.Id === parseInt(patientId));
-    if (index === -1) {
-      throw new Error("Patient not found");
-    }
-    
-    this.patients[index] = {
-      ...this.patients[index],
-      notificationPreferences: {
-        email: preferences.email || this.patients[index].email,
-        phone: preferences.phone || this.patients[index].phone,
-        methods: preferences.methods || ['email'],
-        reminderTimes: preferences.reminderTimes || ['24h', '2h']
-      }
-    };
-    
-    return { ...this.patients[index] };
-  }
-
-  delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    // For now, this would be handled through the general update method
+    // In the future, this could be extended with specific notification fields
+    return await this.update(patientId, {
+      // Add notification preference fields when they exist in the schema
+      Tags: preferences.methods?.join(',') || ''
+    });
   }
 }
 
