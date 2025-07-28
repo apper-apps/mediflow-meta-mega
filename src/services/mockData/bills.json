@@ -1,0 +1,78 @@
+[
+  {
+    "Id": 1,
+    "patientId": 1,
+    "appointmentId": 1,
+    "items": [
+      {
+        "description": "Consultation Fee",
+        "amount": 150
+      },
+      {
+        "description": "Blood Test",
+        "amount": 75
+      }
+    ],
+    "totalAmount": 225,
+    "paidAmount": 225,
+    "status": "paid",
+    "date": "2024-01-20T10:30:00Z"
+  },
+  {
+    "Id": 2,
+    "patientId": 2,
+    "appointmentId": 2,
+    "items": [
+      {
+        "description": "Pediatric Consultation",
+        "amount": 120
+      },
+      {
+        "description": "Vaccination",
+        "amount": 45
+      }
+    ],
+    "totalAmount": 165,
+    "paidAmount": 0,
+    "status": "pending",
+    "date": "2024-01-20T14:45:00Z"
+  },
+  {
+    "Id": 3,
+    "patientId": 3,
+    "appointmentId": 3,
+    "items": [
+      {
+        "description": "Neurological Consultation",
+        "amount": 200
+      },
+      {
+        "description": "MRI Scan",
+        "amount": 800
+      }
+    ],
+    "totalAmount": 1000,
+    "paidAmount": 500,
+    "status": "partial",
+    "date": "2024-01-20T12:00:00Z"
+  },
+  {
+    "Id": 4,
+    "patientId": 4,
+    "appointmentId": 4,
+    "items": [
+      {
+        "description": "Physical Examination",
+        "amount": 180
+      },
+      {
+        "description": "Lab Work",
+        "amount": 125
+      }
+    ],
+    "totalAmount": 305,
+    "paidAmount": 0,
+    "status": "pending",
+    "date": "2024-01-21T10:00:00Z"
+  }
+]

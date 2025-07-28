@@ -1,0 +1,52 @@
+[
+  {
+    "Id": 1,
+    "patientId": 1,
+    "doctorId": 1,
+    "date": "2024-01-20",
+    "time": "10:00",
+    "status": "confirmed",
+    "reason": "Regular checkup",
+    "notes": "Patient feeling well, routine examination"
+  },
+  {
+    "Id": 2,
+    "patientId": 2,
+    "doctorId": 2,
+    "date": "2024-01-20",
+    "time": "14:30",
+    "status": "pending",
+    "reason": "Child vaccination",
+    "notes": "Annual vaccination schedule"
+  },
+  {
+    "Id": 3,
+    "patientId": 3,
+    "doctorId": 4,
+    "date": "2024-01-20",
+    "time": "11:15",
+    "status": "completed",
+    "reason": "Headache consultation",
+    "notes": "Migraine symptoms, prescribed medication"
+  },
+  {
+    "Id": 4,
+    "patientId": 4,
+    "doctorId": 5,
+    "date": "2024-01-21",
+    "time": "09:30",
+    "status": "confirmed",
+    "reason": "Annual physical",
+    "notes": "Comprehensive health assessment"
+  },
+  {
+    "Id": 5,
+    "patientId": 5,
+    "doctorId": 1,
+    "date": "2024-01-21",
+    "time": "15:00",
+    "status": "pending",
+    "reason": "Heart palpitations",
+    "notes": "Patient reports irregular heartbeat"
+  }
+]

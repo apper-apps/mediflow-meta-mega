@@ -1,0 +1,62 @@
+[
+  {
+    "Id": 1,
+    "name": "Robert Smith",
+    "specialization": "Cardiology",
+    "contact": "+1-555-0201",
+    "email": "dr.smith@hospital.com",
+    "isAvailable": true,
+    "workingHours": {
+      "start": "09:00",
+      "end": "17:00"
+    }
+  },
+  {
+    "Id": 2,
+    "name": "Jennifer Davis",
+    "specialization": "Pediatrics",
+    "contact": "+1-555-0202",
+    "email": "dr.davis@hospital.com",
+    "isAvailable": true,
+    "workingHours": {
+      "start": "08:00",
+      "end": "16:00"
+    }
+  },
+  {
+    "Id": 3,
+    "name": "William Brown",
+    "specialization": "Orthopedics",
+    "contact": "+1-555-0203",
+    "email": "dr.brown@hospital.com",
+    "isAvailable": false,
+    "workingHours": {
+      "start": "10:00",
+      "end": "18:00"
+    }
+  },
+  {
+    "Id": 4,
+    "name": "Amanda Wilson",
+    "specialization": "Neurology",
+    "contact": "+1-555-0204",
+    "email": "dr.wilson@hospital.com",
+    "isAvailable": true,
+    "workingHours": {
+      "start": "09:30",
+      "end": "17:30"
+    }
+  },
+  {
+    "Id": 5,
+    "name": "Thomas Anderson",
+    "specialization": "General Medicine",
+    "contact": "+1-555-0205",
+    "email": "dr.anderson@hospital.com",
+    "isAvailable": true,
+    "workingHours": {
+      "start": "08:30",
+      "end": "16:30"
+    }
+  }
+]

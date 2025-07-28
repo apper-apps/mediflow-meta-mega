@@ -1,0 +1,57 @@
+[
+  {
+    "Id": 1,
+    "name": "Sarah Johnson",
+    "dateOfBirth": "1990-05-15",
+    "contact": "+1-555-0123",
+    "email": "sarah.johnson@email.com",
+    "emergencyContact": "+1-555-0124",
+    "bloodGroup": "O+",
+    "allergies": "Penicillin, Shellfish",
+    "registrationDate": "2024-01-15T09:30:00Z"
+  },
+  {
+    "Id": 2,
+    "name": "Michael Chen",
+    "dateOfBirth": "1985-11-22",
+    "contact": "+1-555-0125",
+    "email": "michael.chen@email.com",
+    "emergencyContact": "+1-555-0126",
+    "bloodGroup": "A+",
+    "allergies": "None",
+    "registrationDate": "2024-01-16T14:45:00Z"
+  },
+  {
+    "Id": 3,
+    "name": "Emily Rodriguez",
+    "dateOfBirth": "1992-03-08",
+    "contact": "+1-555-0127",
+    "email": "emily.rodriguez@email.com",
+    "emergencyContact": "+1-555-0128",
+    "bloodGroup": "B-",
+    "allergies": "Latex, Aspirin",
+    "registrationDate": "2024-01-17T11:20:00Z"
+  },
+  {
+    "Id": 4,
+    "name": "David Thompson",
+    "dateOfBirth": "1978-07-12",
+    "contact": "+1-555-0129",
+    "email": "david.thompson@email.com",
+    "emergencyContact": "+1-555-0130",
+    "bloodGroup": "AB+",
+    "allergies": "Peanuts",
+    "registrationDate": "2024-01-18T16:15:00Z"
+  },
+  {
+    "Id": 5,
+    "name": "Lisa Park",
+    "dateOfBirth": "1995-09-25",
+    "contact": "+1-555-0131",
+    "email": "lisa.park@email.com",
+    "emergencyContact": "+1-555-0132",
+    "bloodGroup": "O-",
+    "allergies": "None",
+    "registrationDate": "2024-01-19T10:00:00Z"
+  }
+]
