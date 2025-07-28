@@ -1,0 +1,180 @@
+[
+  {
+    "Id": 1,
+    "patientId": 1,
+    "date": "2024-01-20T10:30:00Z",
+    "diagnosis": "Acute Bronchitis",
+    "symptoms": "Persistent cough, chest congestion, mild fever",
+    "treatment": "Prescribed antibiotics and bronchodilator",
+    "prescriptions": [
+      {
+        "medication": "Amoxicillin 500mg",
+        "dosage": "1 tablet twice daily",
+        "duration": "7 days",
+        "instructions": "Take with food"
+      },
+      {
+        "medication": "Albuterol Inhaler",
+        "dosage": "2 puffs as needed",
+        "duration": "30 days",
+        "instructions": "Use when experiencing breathing difficulty"
+      }
+    ],
+    "notes": "Patient responded well to treatment. Follow-up in 1 week if symptoms persist.",
+    "doctorId": 1,
+    "attachments": [
+      {
+        "id": 1,
+        "name": "chest_xray_01202024.pdf",
+        "type": "application/pdf",
+        "size": "2.4 MB",
+        "uploadDate": "2024-01-20T10:35:00Z"
+      }
+    ],
+    "followUpDate": "2024-01-27T10:30:00Z",
+    "status": "completed"
+  },
+  {
+    "Id": 2,
+    "patientId": 1,
+    "date": "2024-01-27T10:30:00Z",
+    "diagnosis": "Follow-up: Bronchitis Recovery",
+    "symptoms": "Mild cough, improved breathing",
+    "treatment": "Continue current medication, add cough suppressant",
+    "prescriptions": [
+      {
+        "medication": "Dextromethorphan 15mg",
+        "dosage": "1 tablet every 4-6 hours",
+        "duration": "5 days",
+        "instructions": "Do not exceed 6 tablets per day"
+      }
+    ],
+    "notes": "Significant improvement observed. Patient can return to normal activities.",
+    "doctorId": 1,
+    "attachments": [],
+    "followUpDate": null,
+    "status": "completed"
+  },
+  {
+    "Id": 3,
+    "patientId": 2,
+    "date": "2024-01-22T14:00:00Z",
+    "diagnosis": "Hypertension",
+    "symptoms": "High blood pressure readings, occasional headaches",
+    "treatment": "Lifestyle modifications and antihypertensive medication",
+    "prescriptions": [
+      {
+        "medication": "Lisinopril 10mg",
+        "dosage": "1 tablet daily",
+        "duration": "30 days",
+        "instructions": "Take in the morning with or without food"
+      }
+    ],
+    "notes": "Patient advised on dietary changes and regular exercise. Monitor blood pressure daily.",
+    "doctorId": 2,
+    "attachments": [
+      {
+        "id": 2,
+        "name": "bp_readings_chart.pdf",
+        "type": "application/pdf",
+        "size": "1.2 MB",
+        "uploadDate": "2024-01-22T14:05:00Z"
+      }
+    ],
+    "followUpDate": "2024-02-22T14:00:00Z",
+    "status": "ongoing"
+  },
+  {
+    "Id": 4,
+    "patientId": 3,
+    "date": "2024-01-25T09:15:00Z",
+    "diagnosis": "Allergic Reaction",
+    "symptoms": "Skin rash, itching, mild swelling",
+    "treatment": "Antihistamine and topical corticosteroid",
+    "prescriptions": [
+      {
+        "medication": "Cetirizine 10mg",
+        "dosage": "1 tablet daily",
+        "duration": "10 days",
+        "instructions": "Take in the evening"
+      },
+      {
+        "medication": "Hydrocortisone Cream 1%",
+        "dosage": "Apply thin layer",
+        "duration": "7 days",
+        "instructions": "Apply to affected areas twice daily"
+      }
+    ],
+    "notes": "Avoid latex exposure. Consider allergy testing if symptoms recur.",
+    "doctorId": 1,
+    "attachments": [
+      {
+        "id": 3,
+        "name": "allergy_photos.jpg",
+        "type": "image/jpeg",
+        "size": "3.1 MB",
+        "uploadDate": "2024-01-25T09:20:00Z"
+      }
+    ],
+    "followUpDate": "2024-02-01T09:15:00Z",
+    "status": "ongoing"
+  },
+  {
+    "Id": 5,
+    "patientId": 4,
+    "date": "2024-01-19T11:30:00Z",
+    "diagnosis": "Type 2 Diabetes - Routine Check",
+    "symptoms": "Stable blood sugar levels, no acute symptoms",
+    "treatment": "Continue current diabetes management plan",
+    "prescriptions": [
+      {
+        "medication": "Metformin 850mg",
+        "dosage": "1 tablet twice daily",
+        "duration": "90 days",
+        "instructions": "Take with meals"
+      }
+    ],
+    "notes": "HbA1c levels improved. Continue dietary plan and regular monitoring.",
+    "doctorId": 2,
+    "attachments": [
+      {
+        "id": 4,
+        "name": "hba1c_results.pdf",
+        "type": "application/pdf",
+        "size": "856 KB",
+        "uploadDate": "2024-01-19T11:35:00Z"
+      },
+      {
+        "id": 5,
+        "name": "dietary_plan.pdf",
+        "type": "application/pdf",
+        "size": "1.8 MB",
+        "uploadDate": "2024-01-19T11:40:00Z"
+      }
+    ],
+    "followUpDate": "2024-04-19T11:30:00Z",
+    "status": "ongoing"
+  },
+  {
+    "Id": 6,
+    "patientId": 5,
+    "date": "2024-01-21T16:45:00Z",
+    "diagnosis": "Annual Physical Examination",
+    "symptoms": "No acute symptoms, routine checkup",
+    "treatment": "Preventive care and health maintenance",
+    "prescriptions": [],
+    "notes": "Overall health excellent. Recommended annual screenings up to date.",
+    "doctorId": 1,
+    "attachments": [
+      {
+        "id": 6,
+        "name": "annual_physical_summary.pdf",
+        "type": "application/pdf",
+        "size": "2.7 MB",
+        "uploadDate": "2024-01-21T16:50:00Z"
+      }
+    ],
+    "followUpDate": "2025-01-21T16:45:00Z",
+    "status": "completed"
+  }
+]

@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import PatientList from "@/components/organisms/PatientList";
 import PatientForm from "@/components/organisms/PatientForm";
+import TreatmentTimeline from "@/components/organisms/TreatmentTimeline";
 import { patientService } from "@/services/api/patientService";
 
 const Patients = () => {
@@ -13,9 +14,14 @@ const Patients = () => {
     setCurrentView("form");
   }, []);
 
-  const handleEdit = useCallback((patient) => {
+const handleEdit = useCallback((patient) => {
     setSelectedPatient(patient);
     setCurrentView("form");
+  }, []);
+
+  const handleViewHistory = useCallback((patient) => {
+    setSelectedPatient(patient);
+    setCurrentView("history");
   }, []);
 
   const handleSubmit = useCallback(async (formData) => {
@@ -29,24 +35,37 @@ const Patients = () => {
     setRefreshList(prev => prev + 1);
   }, [selectedPatient]);
 
-  const handleCancel = useCallback(() => {
+const handleCancel = useCallback(() => {
+    setCurrentView("list");
+    setSelectedPatient(null);
+  }, []);
+
+  const handleBackToList = useCallback(() => {
     setCurrentView("list");
     setSelectedPatient(null);
   }, []);
 
   return (
     <div className="space-y-6">
-      {currentView === "list" ? (
+{currentView === "list" ? (
         <PatientList
           key={refreshList}
           onEdit={handleEdit}
           onAddNew={handleAddNew}
+          onViewHistory={handleViewHistory}
         />
-      ) : (
+      ) : currentView === "form" ? (
         <PatientForm
           patient={selectedPatient}
           onSubmit={handleSubmit}
           onCancel={handleCancel}
+          onViewHistory={handleViewHistory}
+        />
+      ) : (
+        <TreatmentTimeline
+          patientId={selectedPatient?.Id}
+          patientName={selectedPatient?.name}
+          onBack={handleBackToList}
         />
       )}
     </div>

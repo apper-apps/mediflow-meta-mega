@@ -3,7 +3,7 @@ import Button from "@/components/atoms/Button";
 import FormField from "@/components/molecules/FormField";
 import { toast } from "react-toastify";
 
-const PatientForm = ({ patient, onSubmit, onCancel }) => {
+const PatientForm = ({ patient, onSubmit, onCancel, onViewHistory }) => {
   const [formData, setFormData] = useState({
     name: patient?.name || "",
     dateOfBirth: patient?.dateOfBirth || "",
@@ -138,21 +138,35 @@ const PatientForm = ({ patient, onSubmit, onCancel }) => {
           placeholder="List any known allergies (optional)"
         />
         
-        <div className="flex justify-end space-x-4">
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={onCancel}
-          >
-            Cancel
-          </Button>
-          <Button
-            type="submit"
-            loading={loading}
-            icon="Save"
-          >
-            {patient ? "Update Patient" : "Register Patient"}
-          </Button>
+<div className="flex justify-between">
+          <div>
+            {patient && onViewHistory && (
+              <Button
+                type="button"
+                variant="outline"
+                icon="Clock"
+                onClick={() => onViewHistory(patient)}
+              >
+                View Treatment History
+              </Button>
+            )}
+          </div>
+          <div className="flex space-x-4">
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={onCancel}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              loading={loading}
+              icon="Save"
+            >
+              {patient ? "Update Patient" : "Register Patient"}
+            </Button>
+          </div>
         </div>
       </form>
     </div>

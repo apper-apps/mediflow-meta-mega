@@ -1,5 +1,5 @@
 import patientsData from "@/services/mockData/patients.json";
-
+import { treatmentService } from "./treatmentService";
 class PatientService {
   constructor() {
     this.patients = [...patientsData];
@@ -48,8 +48,11 @@ class PatientService {
     }
     this.patients.splice(index, 1);
     return true;
+}
+async getTreatmentHistory(patientId) {
+    await this.delay(400);
+    return await treatmentService.getByPatientId(patientId);
   }
-
   delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }

@@ -9,7 +9,7 @@ import Empty from "@/components/ui/Empty";
 import { patientService } from "@/services/api/patientService";
 import { format } from "date-fns";
 
-const PatientList = ({ onEdit, onAddNew }) => {
+const PatientList = ({ onEdit, onAddNew, onViewHistory }) => {
   const [patients, setPatients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -116,12 +116,21 @@ const PatientList = ({ onEdit, onAddNew }) => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <Button
-                        variant="ghost"
+variant="ghost"
                         size="sm"
                         icon="Edit"
                         onClick={() => onEdit(patient)}
                       >
                         Edit
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        icon="Clock"
+                        onClick={() => onViewHistory(patient)}
+                        className="ml-2"
+                      >
+                        History
                       </Button>
                     </td>
                   </tr>
